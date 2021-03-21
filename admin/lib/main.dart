@@ -1,8 +1,9 @@
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'DatabaseInsert.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'ViewDatabases.dart';
+import 'Pages/AllLeads.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,9 +25,22 @@ class Home extends StatelessWidget {
         title: Text("Admin App"),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => Get.to(DatabaseInsert()),
-          child: Text("InsertData"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () => Get.to(DatabaseInsert()),
+              child: Text("InsertData"),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.to(ViewDatabases()),
+              child: Text("View Databases"),
+            ),
+            ElevatedButton(
+              onPressed: () => Get.to(AllLeads()),
+              child: Text("AllLeads"),
+            ),
+          ],
         ),
       ),
     );

@@ -1,0 +1,28 @@
+^C:\USERS\KAYO\DESKTOP\FLUTTER\CCDB\ADMIN\ADMIN\BUILD\WINDOWS\CMAKEFILES\5DD0208C47FBC20273983345DFDD047A\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\src\flutter PROJECT_DIR=C:\Users\Kayo\Desktop\Flutter\CCDB\Admin\admin FLUTTER_ROOT=C:\src\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\Kayo\Desktop\Flutter\CCDB\Admin\admin\windows\flutter\ephemeral PROJECT_DIR=C:\Users\Kayo\Desktop\Flutter\CCDB\Admin\admin FLUTTER_TARGET=C:\Users\Kayo\Desktop\Flutter\CCDB\Admin\admin\lib\main.dart DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Users\Kayo\Desktop\Flutter\CCDB\Admin\admin\.dart_tool\package_config.json C:/src/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\KAYO\DESKTOP\FLUTTER\CCDB\ADMIN\ADMIN\BUILD\WINDOWS\CMAKEFILES\FC3D01541EAE6F97DBEAE96A29BE0E37\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\KAYO\DESKTOP\FLUTTER\CCDB\ADMIN\ADMIN\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/Kayo/Desktop/Flutter/CCDB/Admin/admin/windows -BC:/Users/Kayo/Desktop/Flutter/CCDB/Admin/admin/build/windows --check-stamp-file C:/Users/Kayo/Desktop/Flutter/CCDB/Admin/admin/build/windows/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

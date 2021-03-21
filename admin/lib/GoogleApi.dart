@@ -1,5 +1,7 @@
 import 'package:gsheets/gsheets.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'AllLeadsController.dart';
+import 'package:get/get.dart';
 // your google auth credentials
 
 const _credentials = r'''
@@ -36,4 +38,96 @@ Future<List<List<String>>> reading() async {
 
     return [];
   }
+}
+
+void outputList(List<Map> list) async {
+  final ss = await gsheets.spreadsheet(_spreadsheetId);
+  // get worksheet by its title
+  var sheet = ss.worksheetByTitle('Sheet2');
+  Future future = Future.delayed(Duration(milliseconds: 500));
+  int i = 0;
+  list.forEach((element) async {
+    i++;
+    print(i);
+    await future;
+    print(element['id']);
+    if (element['esito'] == "ClosedCall")
+      sheet.values
+          .insertValue("ClosedCall :" + element['notes'], column: 1, row: i);
+    if (element['esito'] == "NotAnswered")
+      sheet.values.insertValue("NotAnswered", column: 1, row: i);
+    if (element['esito'] == "ToRecall") {
+      String message = "ToRecall (" +
+          DateTime.parse(list[i]['date'].toDate().toString()).day.toString() +
+          " ora:" +
+          DateTime.parse(list[i]['date'].toDate().toString()).hour.toString() +
+          ")";
+      sheet.values.insertValue(message, column: 1, row: i);
+    }
+    if (element['esito'] == "RecallMeeting") {
+      String message = "RecallMeeting (" +
+          DateTime.parse(list[i]['date'].toDate().toString()).day.toString() +
+          " ora:" +
+          DateTime.parse(list[i]['date'].toDate().toString()).hour.toString() +
+          ")";
+
+      sheet.values.insertValue(message, column: 1, row: i);
+    }
+    if (element['esito'] == "Meeting") {
+      String message = "Meeting Preso (" +
+          DateTime.parse(list[i]['date'].toDate().toString()).day.toString() +
+          " ora:" +
+          DateTime.parse(list[i]['date'].toDate().toString()).hour.toString() +
+          ")";
+      sheet.values.insertValue(message, column: 1, row: i);
+    }
+  });
+}
+
+void outputLead(List<Map> list) async {
+  final ss = await gsheets.spreadsheet(_spreadsheetId);
+  // get worksheet by its title
+  var sheet = ss.worksheetByTitle('Sheet2');
+
+  AllLeadsController controller = Get.find();
+
+  DocumentReference leads =
+      FirebaseFirestore.instance.collection('ID').doc('output');
+  DocumentSnapshot output = await leads.get();
+
+  int i = output.data()['id'];
+
+  if (list[i]['esito'] == "ClosedCall")
+    sheet.values.insertValue("ClosedCall :" + list[i]['notes'],
+        column: 1, row: controller.getI());
+  if (list[i]['esito'] == "NotAnswered")
+    sheet.values.insertValue("NotAnswered", column: 1, row: controller.getI());
+  if (list[i]['esito'] == "ToRecall") {
+    String message = "ToRecall (" +
+        DateTime.parse(list[i]['date'].toDate().toString()).day.toString() +
+        " ora:" +
+        DateTime.parse(list[i]['date'].toDate().toString()).hour.toString() +
+        ")";
+    sheet.values.insertValue(message, column: 1, row: controller.getI());
+  }
+  if (list[i]['esito'] == "RecallMeeting") {
+    String message = "RecallMeeting (" +
+        DateTime.parse(list[i]['date'].toDate().toString()).day.toString() +
+        " ora:" +
+        DateTime.parse(list[i]['date'].toDate().toString()).hour.toString() +
+        ")";
+
+    sheet.values.insertValue(message, column: 1, row: controller.getI());
+  }
+  if (list[i]['esito'] == "Meeting") {
+    String message = "Meeting Preso (" +
+        DateTime.parse(list[i]['date'].toDate().toString()).day.toString() +
+        " ora:" +
+        DateTime.parse(list[i]['date'].toDate().toString()).hour.toString() +
+        ")";
+    sheet.values.insertValue(message, column: 1, row: controller.getI());
+  }
+
+  controller.increment();
+  leads.update({"id": FieldValue.increment(1)});
 }
